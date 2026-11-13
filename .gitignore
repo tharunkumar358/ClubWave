@@ -1,0 +1,11 @@
+target/
+.settings/
+.classpath
+.project
+*.log
+*.war
+.DS_Store
+Thumbs.db
+
+# Never commit local database credentials
+src/main/resources/db.properties

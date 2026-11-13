@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Apache Tomcat 9 SameSite cookie policy for session CSRF defense-in-depth -->
+    <CookieProcessor sameSiteCookies="lax" />
+</Context>

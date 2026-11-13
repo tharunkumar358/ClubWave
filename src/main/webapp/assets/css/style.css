@@ -1,0 +1,332 @@
+/* ==========================================================================
+   CampusClubSystem — Modern College Club & Event Administration Design System
+   Stack: Bootstrap 5.3 + Bootstrap Icons + Pure CSS3 Variables & Animations
+   ========================================================================== */
+
+:root,
+[data-bs-theme="light"] {
+    --cf-bg: #f4f6fb;
+    --cf-surface: #ffffff;
+    --cf-surface-alt: #eef2ff;
+    --cf-glass: rgba(255, 255, 255, 0.84);
+    --cf-border: rgba(15, 23, 42, 0.09);
+    --cf-text: #0f172a;
+    --cf-text-muted: #475569;
+    --cf-primary: #4338ca;
+    --cf-primary-hover: #3730a3;
+    --cf-shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.05);
+    --cf-shadow-md: 0 10px 28px rgba(15, 23, 42, 0.08);
+    --cf-shadow-lg: 0 18px 42px rgba(30, 27, 75, 0.14);
+}
+
+[data-bs-theme="dark"] {
+    --cf-bg: #0b1120;
+    --cf-surface: #131c31;
+    --cf-surface-alt: #1b2742;
+    --cf-glass: rgba(19, 28, 49, 0.86);
+    --cf-border: rgba(148, 163, 184, 0.16);
+    --cf-text: #f1f5f9;
+    --cf-text-muted: #94a3b8;
+    --cf-primary: #6366f1;
+    --cf-primary-hover: #818cf8;
+    --cf-shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.28);
+    --cf-shadow-md: 0 12px 30px rgba(0, 0, 0, 0.38);
+    --cf-shadow-lg: 0 20px 46px rgba(0, 0, 0, 0.5);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background-color: var(--cf-bg);
+    color: var(--cf-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Visible keyboard focus indicator for accessibility */
+:focus-visible {
+    outline: 3px solid var(--cf-primary) !important;
+    outline-offset: 2px;
+}
+
+/* Top Glassmorphism Navbar */
+.cf-navbar {
+    background: var(--cf-glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--cf-border);
+    box-shadow: var(--cf-shadow-sm);
+}
+
+.cf-brand-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #4338ca 0%, #7c3aed 100%);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    box-shadow: 0 4px 12px rgba(67, 56, 202, 0.32);
+}
+
+.cf-nav-link {
+    font-weight: 500;
+    border-radius: 0.6rem;
+    padding: 0.45rem 0.85rem !important;
+    color: var(--cf-text-muted);
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.cf-nav-link:hover,
+.cf-nav-link.active {
+    color: var(--cf-primary) !important;
+    background-color: var(--cf-surface-alt);
+}
+
+.cf-lakshya-pill {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(124, 58, 237, 0.16));
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: var(--cf-text) !important;
+    font-weight: 600;
+}
+
+/* Cards & Surfaces */
+.cf-card {
+    background: var(--cf-surface);
+    border: 1px solid var(--cf-border);
+    border-radius: 1rem;
+    box-shadow: var(--cf-shadow-sm);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.cf-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--cf-shadow-md);
+}
+
+.cf-stat-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.cf-stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+}
+
+/* Club Theme Accents: Prakruthi (emerald), Spoorthi (sky), Kruthi (amber), Saheli (rose), Default (indigo) */
+.club-accent-emerald {
+    --club-grad: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    --club-soft: rgba(16, 185, 129, 0.13);
+    --club-color: #059669;
+}
+
+.club-accent-sky {
+    --club-grad: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+    --club-soft: rgba(14, 165, 233, 0.13);
+    --club-color: #0284c7;
+}
+
+.club-accent-amber {
+    --club-grad: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+    --club-soft: rgba(245, 158, 11, 0.15);
+    --club-color: #d97706;
+}
+
+.club-accent-rose {
+    --club-grad: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+    --club-soft: rgba(225, 29, 72, 0.13);
+    --club-color: #e11d48;
+}
+
+.club-accent-indigo {
+    --club-grad: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
+    --club-soft: rgba(99, 102, 241, 0.14);
+    --club-color: #4f46e5;
+}
+
+[data-bs-theme="dark"] .club-accent-emerald { --club-color: #34d399; }
+[data-bs-theme="dark"] .club-accent-sky     { --club-color: #38bdf8; }
+[data-bs-theme="dark"] .club-accent-amber   { --club-color: #fbbf24; }
+[data-bs-theme="dark"] .club-accent-rose    { --club-color: #fb7185; }
+[data-bs-theme="dark"] .club-accent-indigo  { --club-color: #818cf8; }
+
+.club-banner-strip {
+    height: 6px;
+    background: var(--club-grad, linear-gradient(135deg, #4338ca, #6366f1));
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.club-icon-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--club-soft, rgba(99, 102, 241, 0.14));
+    color: var(--club-color, #4f46e5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.club-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: var(--club-soft, rgba(99, 102, 241, 0.14));
+    color: var(--club-color, #4f46e5);
+}
+
+/* Hero & Flagship Lakshya Spotlight */
+.cf-hero-gradient {
+    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.32), transparent 52%),
+                linear-gradient(135deg, #1e1b4b 0%, #312e81 55%, #1e293b 100%);
+    color: #f8fafc;
+    border-radius: 1.35rem;
+    box-shadow: var(--cf-shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.lakshya-spotlight {
+    background: radial-gradient(circle at 88% 18%, rgba(251, 191, 36, 0.28), transparent 45%),
+                linear-gradient(130deg, #1e1b4b 0%, #3b0764 52%, #0f172a 100%);
+    color: #ffffff;
+    border-radius: 1.35rem;
+    border: 1px solid rgba(251, 191, 36, 0.32);
+    box-shadow: var(--cf-shadow-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.lakshya-glass-tile {
+    background: rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0.9rem;
+    padding: 1rem 1.15rem;
+}
+
+/* Auth Split Container */
+.cf-auth-shell {
+    max-width: 960px;
+    margin: 2rem auto;
+}
+
+.cf-auth-aside {
+    background: linear-gradient(145deg, #1e1b4b 0%, #4338ca 58%, #6d28d9 100%);
+    color: #ffffff;
+}
+
+/* Accessible Status Badges (always pair with icon + text) */
+.badge-soft-success {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.32);
+}
+
+.badge-soft-warning {
+    background-color: rgba(245, 158, 11, 0.16);
+    color: #b45309;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.badge-soft-danger {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #b91c1c;
+    border: 1px solid rgba(239, 68, 68, 0.32);
+}
+
+.badge-soft-info {
+    background-color: rgba(14, 165, 233, 0.15);
+    color: #0369a1;
+    border: 1px solid rgba(14, 165, 233, 0.32);
+}
+
+.badge-soft-secondary {
+    background-color: rgba(100, 116, 139, 0.15);
+    color: #334155;
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+[data-bs-theme="dark"] .badge-soft-success   { color: #6ee7b7; }
+[data-bs-theme="dark"] .badge-soft-warning   { color: #fcd34d; }
+[data-bs-theme="dark"] .badge-soft-danger    { color: #fca5a5; }
+[data-bs-theme="dark"] .badge-soft-info      { color: #7dd3fc; }
+[data-bs-theme="dark"] .badge-soft-secondary { color: #cbd5e1; }
+
+/* Buttons & Entrance Animations */
+.btn-cf-primary {
+    background: linear-gradient(135deg, #4338ca 0%, #5b21b6 100%);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+}
+
+.btn-cf-primary:hover,
+.btn-cf-primary:focus {
+    color: #ffffff;
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(67, 56, 202, 0.35);
+}
+
+@keyframes cfFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cf-animate-in {
+    animation: cfFadeUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cf-delay-1 { animation-delay: 0.05s; }
+.cf-delay-2 { animation-delay: 0.10s; }
+.cf-delay-3 { animation-delay: 0.15s; }
+
+/* Respect user's operating system reduced-motion setting */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .cf-card-hover:hover {
+        transform: none;
+    }
+}

@@ -1,0 +1,117 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.campusflow.model.User" %>
+<%@ page import="com.campusflow.util.AuthUtil" %>
+<%@ page import="com.campusflow.util.ViewHelper" %>
+<%
+    String navCtx = request.getContextPath();
+    String activeNav = (String) request.getAttribute("activeNav");
+    if (activeNav == null) {
+        activeNav = "";
+    }
+    boolean loggedIn = AuthUtil.isAuthenticated(request);
+    String navRole = AuthUtil.getUserRole(request);
+    String navUserName = AuthUtil.getUserName(request);
+%>
+<nav class="navbar navbar-expand-lg sticky-top cf-navbar py-2" aria-label="Primary navigation">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-decoration-none"
+           href="<%= navCtx %>/<%= loggedIn ? "dashboard" : "home" %>">
+            <span class="cf-brand-badge" aria-hidden="true"><i class="bi bi-mortarboard-fill"></i></span>
+            <span>CampusClub<span class="text-primary">System</span></span>
+        </a>
+
+        <div class="d-flex align-items-center gap-2 order-lg-3">
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-2 lh-1"
+                    data-theme-toggle aria-label="Switch theme">
+                <i class="bi bi-moon-stars-fill"></i>
+            </button>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#cfMainNav" aria-controls="cfMainNav"
+                    aria-expanded="false" aria-label="Toggle navigation menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-lg-2" id="cfMainNav">
+            <% if (loggedIn) { %>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-1 mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link cf-nav-link <%= "dashboard".equals(activeNav) ? "active" : "" %>"
+                           href="<%= navCtx %>/dashboard">
+                            <i class="bi bi-grid-1x2-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cf-nav-link <%= "clubs".equals(activeNav) ? "active" : "" %>"
+                           href="<%= navCtx %>/clubs">
+                            <i class="bi bi-people-fill me-1"></i>Clubs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cf-nav-link <%= "events".equals(activeNav) ? "active" : "" %>"
+                           href="<%= navCtx %>/events">
+                            <i class="bi bi-calendar2-event-fill me-1"></i>Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cf-nav-link cf-lakshya-pill <%= "lakshya".equals(activeNav) ? "active" : "" %>"
+                           href="<%= navCtx %>/lakshya">
+                            <i class="bi bi-stars text-warning me-1"></i>Lakshya
+                        </a>
+                    </li>
+                    <% if (User.ROLE_STUDENT.equals(navRole) || User.ROLE_CLUB_LEADER.equals(navRole)) { %>
+                        <li class="nav-item">
+                            <a class="nav-link cf-nav-link <%= "registrations".equals(activeNav) ? "active" : "" %>"
+                               href="<%= navCtx %>/registrations">
+                                <i class="bi bi-ticket-perforated-fill me-1"></i>My Registrations
+                            </a>
+                        </li>
+                    <% } %>
+                    <% if (!User.ROLE_STUDENT.equals(navRole)) { %>
+                        <li class="nav-item">
+                            <a class="nav-link cf-nav-link <%= "reports".equals(activeNav) ? "active" : "" %>"
+                               href="<%= navCtx %>/reports">
+                                <i class="bi bi-bar-chart-line-fill me-1"></i>Reports
+                            </a>
+                        </li>
+                    <% } %>
+                    <% if (User.ROLE_ADMIN.equals(navRole)) { %>
+                        <li class="nav-item">
+                            <a class="nav-link cf-nav-link <%= "adminUsers".equals(activeNav) ? "active" : "" %>"
+                               href="<%= navCtx %>/admin/users">
+                                <i class="bi bi-shield-lock-fill me-1"></i>Users &amp; Roles
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+
+                <div class="d-flex flex-wrap align-items-center gap-2 me-lg-2 pt-2 pt-lg-0 border-top border-lg-0">
+                    <div class="d-flex align-items-center gap-2 px-2 py-1 rounded-pill bg-body-tertiary border small">
+                        <i class="bi bi-person-circle text-primary"></i>
+                        <span class="fw-semibold"><%= ViewHelper.esc(navUserName) %></span>
+                        <span class="badge rounded-pill text-bg-primary"><%= ViewHelper.esc(ViewHelper.roleDisplay(navRole)) %></span>
+                    </div>
+
+                    <form method="post" action="<%= navCtx %>/logout" class="m-0">
+                        <input type="hidden" name="_csrf" value="<%= ViewHelper.csrf(request) %>">
+                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                            <i class="bi bi-box-arrow-right me-1"></i>Sign Out
+                        </button>
+                    </form>
+                </div>
+            <% } else { %>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-1 mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link cf-nav-link <%= "home".equals(activeNav) ? "active" : "" %>"
+                           href="<%= navCtx %>/home">Home</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2 me-lg-2 pt-2 pt-lg-0">
+                    <a href="<%= navCtx %>/login" class="btn btn-sm btn-outline-primary rounded-pill px-3">Log In</a>
+                    <a href="<%= navCtx %>/register" class="btn btn-sm btn-cf-primary rounded-pill px-3">Student Sign Up</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</nav>
